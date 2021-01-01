@@ -1,0 +1,105 @@
+﻿@model witchSaga.Models.Person
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row">
+    <div class="col-lg-6">
+        <h1 class="mt-5">Geekseat Witch Saga</h1>
+        <p class="lead">Return Of The Coder!</p>
+        <p class="text-justify">Somewhere far far away, there is a village which is controlled by a dark and cunning witch. Coincidentally, this witch is also a die-hard programmer. The witch has power to control death and life of the villager. The witch will kill a number of villagers each year.</p>
+        <p class="text-justify">Since the witch is a die hard programmer, she follow a specific rule to decide the number of villagers she should kill each year.</p>
+        <p class="text-justify">
+            The villagers are furious with the witch and want to get rid of her and there is one way to get rid of her. The witch will only leave if there is a brave programmer in the villager who can create a program to solve this problem:
+            If given two people whose age of death and year of death are known, find the average number of
+            people the witch killed on year of birth of those people.
+        </p>
+        <p class="lead">
+            The Return of Coder!
+        </p>
+        <p class="text-justify">After trying to solve the riddle with the PHP Sword <strong>Ahmad Cahyana</strong> back again to defeat The Witch once more with <strong>.NET Core MVC</strong></p>
+    </div>
+    <div class="col-lg-6 align-self-xl-center">
+        <h1 class="mt-5">Expel The Witch!</h1>
+        <form id="expel" method="post">
+            <div class="row">
+                <div class="col-lg-9">
+                    <div id="inputFormRow">
+                        <div class="input-group mb-3">
+                            <input asp-for="YearofDeath" name="[0].YearofDeath" class="form-control" placeholder="Enter Year of Death" autocomplete="off" required>
+                            <input asp-for="AgeofDeath" name="[0].AgeofDeath" class="form-control" placeholder="Enter Age of Death" autocomplete="off" required>
+                            <div class="input-group-append">
+                                <button id="removeRow" type="button" class="btn btn-danger">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="newRow"></div>
+                    <input type="hidden" name="form_submitted" value="1" />
+                    <button type="submit" id="send_form" class="btn btn-primary align-content-xl-end">Submit</button>
+                </div>
+                <div class="col-lg-3">
+                    <button id="addRow" type="button" class="btn btn-success">Add Row</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" id="details-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">We Solve the Riddle!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body load_modal">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script type="text/javascript">
+        var rowNo = 1;
+        $("#addRow").click(function () {
+            var html = '';
+            html += '<div id="inputFormRow">';
+            html += '<div class="input-group mb-3">';
+            html += `<input asp-for="YearofDeath" name="[${rowNo}].YearofDeath" class="form-control" placeholder="Enter Year of Death" autocomplete="off" required>`;
+            html += `<input asp-for="AgeofDeath" name="[${rowNo}].AgeofDeath" class="form-control" placeholder="Enter Age of Death" autocomplete="off" required>`;
+            html += '<div class="input-group-append">';
+            html += '<button id="removeRow" type="button" class="btn btn-danger">Remove</button>';
+            html += '</div>';
+            html += '</div>';
+            $('#newRow').append(html);
+            rowNo += 1;
+        });
+        $(document).on('click', '#removeRow', function () {
+            $(this).closest('#inputFormRow').remove();
+        });
+        $('#send_form').click(function (e) {
+            e.preventDefault();
+            var persons = $('#expel').serialize();
+            $('#send_form').html('Sending..');
+            $.ajax({
+                type: "POST",
+                url: "/home/SolveProblemView",
+                data: persons,
+                success: function (response) {
+                    $('#send_form').html('Submit');
+                    $('#details-modal').modal();
+                    $('#details-modal').on('shown.bs.modal', function () {
+                        $('#details-modal .load_modal').html(response);
+                    });
+                    $('#details-modal').on('hidden.bs.modal', function () {
+                        $('#details-modal .modal-body').data('');
+                    });
+                }
+            });
+        });
+    </script>
+}

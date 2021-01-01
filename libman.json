@@ -1,0 +1,21 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "jquery@3.5.1",
+      "files": [ "jquery.js" ],
+      "destination": "wwwroot/lib/jquery/"
+    },
+    {
+      "library": "twitter-bootstrap@4.5.3",
+      "files": [ "css/bootstrap.min.css", "css/bootstrap-grid.min.css", "js/bootstrap.bundle.min.js", "js/bootstrap.min.js" ],
+      "destination": "wwwroot/lib/bootstrap/"
+    },
+    {
+      "library": "knockout@3.5.1",
+      "files": [ "knockout-latest.min.js" ],
+      "destination": "wwwroot/lib/knockout/"
+    }
+  ]
+}
