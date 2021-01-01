@@ -27,8 +27,8 @@
                 <div class="col-lg-9">
                     <div id="inputFormRow">
                         <div class="input-group mb-3">
-                            <input asp-for="YearofDeath" name="[0].YearofDeath" class="form-control" placeholder="Enter Year of Death" autocomplete="off" required>
-                            <input asp-for="AgeofDeath" name="[0].AgeofDeath" class="form-control" placeholder="Enter Age of Death" autocomplete="off" required>
+                            <input asp-for="YearofDeath" type="number" name="[0].YearofDeath" class="form-control" placeholder="Enter Year of Death" autocomplete="off" required>
+                            <input asp-for="AgeofDeath" type="number" name="[0].AgeofDeath" class="form-control" placeholder="Enter Age of Death" autocomplete="off" required>
                             <div class="input-group-append">
                                 <button id="removeRow" type="button" class="btn btn-danger">Remove</button>
                             </div>
@@ -69,8 +69,8 @@
             var html = '';
             html += '<div id="inputFormRow">';
             html += '<div class="input-group mb-3">';
-            html += `<input asp-for="YearofDeath" name="[${rowNo}].YearofDeath" class="form-control" placeholder="Enter Year of Death" autocomplete="off" required>`;
-            html += `<input asp-for="AgeofDeath" name="[${rowNo}].AgeofDeath" class="form-control" placeholder="Enter Age of Death" autocomplete="off" required>`;
+            html += `<input asp-for="YearofDeath" type="number" name="[${rowNo}].YearofDeath" class="form-control" placeholder="Enter Year of Death" autocomplete="off" required>`;
+            html += `<input asp-for="AgeofDeath" type="number" name="[${rowNo}].AgeofDeath" class="form-control" placeholder="Enter Age of Death" autocomplete="off" required>`;
             html += '<div class="input-group-append">';
             html += '<button id="removeRow" type="button" class="btn btn-danger">Remove</button>';
             html += '</div>';
