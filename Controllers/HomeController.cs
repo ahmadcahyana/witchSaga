@@ -32,7 +32,7 @@ namespace witchSaga.Controllers
             int sumKilled = 0;
             foreach (var person in persons)
             {
-                if (person.YearofDeath < 1 | person.YearofDeath <= person.AgeofDeath)
+                if (person.YearofDeath < 1 | person.YearofDeath <= person.AgeofDeath | person.AgeofDeath < 1)
                 {
                     persons = null;
                     break;

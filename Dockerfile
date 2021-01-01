@@ -19,4 +19,5 @@ RUN dotnet publish "witchSaga.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "witchSaga.dll"]
+# ENTRYPOINT ["dotnet", "witchSaga.dll"]
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet witchSaga.dll
